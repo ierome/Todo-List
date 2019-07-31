@@ -1,6 +1,7 @@
 import React from 'react'
 import { markCompleted } from '../actions/example'
-import { Button } from 'semantic-ui-react'
+import { Checkbox } from 'semantic-ui-react'
+import { markThatShit } from '../api/TodoAPI'
 
 
 export default props => {
@@ -8,9 +9,9 @@ export default props => {
     function markComplete(e) {
         e.preventDefault()
         //console.log(props.id)
-        markCompleted(props.id);
+        markThatShit(props.id)
     }
 return (
-    <Button onClick={markComplete}>Complete</Button>
+    <Checkbox defaultChecked={props.checked} onClick={markComplete}>Complete</Checkbox>
 )
 }

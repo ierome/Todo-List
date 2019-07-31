@@ -2,8 +2,8 @@ import { VisibilityFilters } from '../actions/example'
 
 
 const initialState = {
-  greeting: '',
   todos: [],
+  visibleTodos: [],
   filter: 'all'
 }
 
@@ -27,7 +27,11 @@ export default function(state = initialState, action) {
 				return todo
       })}
       case 'FILTER_TODOS': 
-			return {...state, filter: action.filter}
+      return {...state, filter: action.filter}
+      case 'GRAB_TODOS':
+        return {visibleTodos: state, ...state, todos: action.payload}
+      case 'ADD_API':
+        return {...state, todos: action.payload}
     default:
       return state
   }

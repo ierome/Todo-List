@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Delete from './Delete'
 import Complete from './Complete'
 import '../styles/Form.css'
 import { filterTodos } from '../actions/example'
 import { Button } from 'semantic-ui-react'
+import { getTodos } from '../api/TodoAPI'
 
 export default props => {
     const todos = useSelector(appState => {
@@ -18,7 +19,11 @@ export default props => {
             return appState.todos.filter(item => item.completed)
           }
     })
-
+    
+    useEffect(() => {
+        getTodos()
+    }, [])
+    
     function all(e) {
         e.preventDefault()
         filterTodos("all")
@@ -34,11 +39,11 @@ export default props => {
     const numbah = todos.filter(item => !item.completed)
     return (
       <>
-      <h1>To do list:</h1> {todos.map((item, i) => {
+      {todos.map((item, i) => {
           return (
           <div className="todo" key={i}>
-              <Complete id={item.id}></Complete>
-              <p className={item.completed ? "completed" : "incomplete"} id={item.id}>{item.name}</p>
+              <Complete checked={item.completed} id={item.id}></Complete>
+              <p className={item.completed ? "todoItem completed" : "todoItem incomplete"} id={item.id}>{item.name}</p>
               <Delete id={item.id}></Delete>
           </div>
           )

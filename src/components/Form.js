@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { addTodos } from '../actions/example'
-import '../styles/Form.css'
 import Todos from './Todos'
 import { Form, Input, Button } from 'semantic-ui-react'
+import { addTodoz } from '../api/TodoAPI'
 
 
 export default props => {
@@ -10,7 +10,7 @@ const [name, setName] = useState('')
 
 function addTodo(e) {
     e.preventDefault()
-    addTodos(name)
+    addTodoz(name)
     setName('')
 }
   
